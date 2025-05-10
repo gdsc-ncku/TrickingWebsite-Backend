@@ -7,7 +7,9 @@ from config import (
     MONGODB_TLS,
     MONGODB_CAFILE
 )
-# from scheams import
+from schemas.trick import Trick
+from schemas.category import Category
+from schemas.diffculty import Difficulty
 
 client = AsyncIOMotorClient(
     MONGODB_URI,
@@ -22,7 +24,8 @@ async def setup():
     await init_beanie(
         database=DB,
         document_models=[
-            # TeamData,
-            # UserData
+            Trick,
+            Category,
+            Difficulty
         ]
     )
