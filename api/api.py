@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import Config, Server
 
 from config import ALLOW_ORIGINS, HOST, PORT
-
+from .routers import tricktionary
 
 app = FastAPI()
 app.add_middleware(
@@ -13,6 +13,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(tricktionary.router, prefix="/tricktionary")
 
 
 async def run_api():
