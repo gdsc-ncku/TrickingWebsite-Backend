@@ -20,11 +20,14 @@ async def register(data: UserCreate):
     if await User.find_one(User.email == data.email) or \
         await User.find_one(User.phone_number == data.phone_number):
         return USER_ALREADY_EXISTS
-    jwt_token = generate_tokens(user_dict)
 
-    await User.insert_one(User(**user_dict))
+    user = User(**user_dict)
+    await User.insert_one(user)
 
-    return jwt_token
+    user_dict = user.model_dump()
+    user_dict['id'] = str(user_dict['id'])
+
+    return generate_tokens(user_dict)
 
 async def login(user: User, password: str):
     if not user:
@@ -33,7 +36,7 @@ async def login(user: User, password: str):
         return WRONG_ACCOUNT_OR_PASSWORD
     
     user_dict = user.model_dump()
-    user_dict.pop("id", None)
+    user_dict['id'] = str(user_dict['id'])
 
     return generate_tokens(user_dict)
 
