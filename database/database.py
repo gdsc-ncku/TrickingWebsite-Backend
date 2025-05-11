@@ -10,6 +10,7 @@ from config import (
 from schemas.trick import Trick
 from schemas.category import Category
 from schemas.diffculty import Difficulty
+from schemas.user import User
 
 client = AsyncIOMotorClient(
     MONGODB_URI,
@@ -26,6 +27,7 @@ async def setup():
         document_models=[
             Trick,
             Category,
-            Difficulty
+            Difficulty,
+            User
         ]
     )
