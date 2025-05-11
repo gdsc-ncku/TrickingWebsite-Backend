@@ -5,9 +5,9 @@ USER_ALREADY_EXISTS = HTTPException(
     detail="The account is already exist"
 )
 
-WRONG_EMAIL_OR_PASSWORD = HTTPException(
+WRONG_ACCOUNT_OR_PASSWORD = HTTPException(
     status_code=400,
-    detail="wrong email or password"
+    detail="wrong email or phone number or password"
 )
 TOKEN_EXPIRED = HTTPException(
     status_code=400, 
