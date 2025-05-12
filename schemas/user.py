@@ -27,3 +27,11 @@ class User(UserBase, Document):
 
 class UserUpdate(UserBase):
     pass
+
+class EmailLogin(BaseModel):
+    email: str
+    password: str
+
+class PhoneLogin(BaseModel):
+    phone_number: str
+    password: str

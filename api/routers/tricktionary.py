@@ -1,6 +1,4 @@
 import time
-
-from bson import ObjectId
 from fastapi import APIRouter
 
 from schemas.trick import Trick
@@ -29,8 +27,8 @@ async def get_all_trick():
     return trick_list
 
 @router.get("/get_proficiency")
-async def get_proficiency(payload=UserDepend):
-    user_id = ObjectId(payload['id'])
+async def get_proficiency(payload: UserDepend):
+    user_id = payload['id']
 
     if not await User.get(user_id):
         return USER_NOT_EXISTS
@@ -41,9 +39,9 @@ async def get_proficiency(payload=UserDepend):
     return proficiency
 
 @router.put("/put_proficiency")
-async def put_proficiency(data: ProficiencyUpdate, payload=UserDepend):
-    user_id = ObjectId(payload['id'])
-    trick_id = ObjectId(data.trick_id)
+async def put_proficiency(data: ProficiencyUpdate, payload: UserDepend):
+    user_id = payload['id']
+    trick_id = data.trick_id
 
     if not await User.get(user_id):
         return USER_NOT_EXISTS
